@@ -1,4 +1,7 @@
-import { PageHeader, Button, Tooltip, Badge } from 'antd';
+import PageHeader from 'antd/lib/page-header'
+import Button from 'antd/lib/button'
+import Tooltip from 'antd/lib/tooltip'
+import Badge from 'antd/lib/badge'
 import { LockTwoTone , MailOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom'
 

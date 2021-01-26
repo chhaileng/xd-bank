@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Spin } from 'antd';
+import Layout from 'antd/lib/layout';
+import Spin from 'antd/lib/spin';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
@@ -24,7 +25,7 @@ export default function App() {
       .then(user => {
         setLoading(false);
         setUser(user);
-        
+
         if (!user) {
           history.push('/login');
         }
@@ -32,7 +33,6 @@ export default function App() {
   }, [history, setUser, setLoading]);
 
   React.useEffect(() => {
-    console.log('hahahah')
     if (!doneFirstLoad || location.pathname) {
       reloadUser();
       setDoneFirstLoad(true);
@@ -65,7 +65,7 @@ export default function App() {
                 <Faq />
               </Route>
               <Route path="/">
-                <Home user={user} />
+                <Home user={user} setUser={setUser} />
               </Route>
             </Switch>
           ) }

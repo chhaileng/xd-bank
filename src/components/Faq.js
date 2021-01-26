@@ -1,5 +1,8 @@
 import React from 'react';
-import { Typography, Collapse, Input, Space } from 'antd';
+import Typography from 'antd/lib/typography'
+import Collapse from 'antd/lib/collapse'
+import Input from 'antd/lib/input'
+import Space from 'antd/lib/space'
 const { Panel } = Collapse;
 
 function callback(key) {

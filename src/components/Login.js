@@ -1,5 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Typography, Alert } from 'antd';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
+import Typography from 'antd/lib/typography';
+import Alert from 'antd/lib/alert';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
@@ -7,7 +11,6 @@ export default function Login() {
   const history = useHistory();
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
     fetch('/login', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},

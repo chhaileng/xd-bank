@@ -15,8 +15,15 @@ function handleLogin(username, password) {
 
   users[username] = {
     username,
-    money: 20000,
-    transfers: [],
+    balance: 10000,
+    transactions: [
+      {
+        amount: 10000,
+        username: 'xd_bank',
+        remark: 'Initial Balance :)',
+        balance: 10000
+      }
+    ],
   };
   sessions[sessionID] = username;
 
@@ -28,19 +35,19 @@ function logout(sessionID) {
 }
 
 function getUser(sessionID) {
-  console.log(sessions, users)
+  // console.log(sessions, users)
   return users[sessions[sessionID]];
 }
 
 // Returns the updated user, or false on failure.
-function makeTransfer(user, amount, to, description) {
-  if (user.money < amount) {
+function makeTransfer(user, amount, username, remark) {
+  if (user.balance < amount) {
     return false;
   }
-  const { username, transfers } = user;
-  user.money -= amount;
-  transfers.push({ amount, description, to, balance: user.money });
-
+  
+  const { transactions } = user;
+  user.balance -= amount;
+  transactions.push({ amount: -amount, remark, username, balance: user.balance });
   return user;
 }
 
