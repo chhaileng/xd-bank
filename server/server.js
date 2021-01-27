@@ -33,10 +33,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get(['/login', '/search'], (req, res) => {
-  res.sendFile(path.join(BUILD_PATH, 'index.html'));
-});
-
 app.get('/user', (req, res) => {
   const { session } = req.session;
   const user = db.getUser(session);
@@ -55,7 +51,7 @@ app.get('/hacker.com/xss.js', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  res.redirect('/');
+  res.sendFile(path.join(BUILD_PATH, 'index.html'));
 });
 
 app.post('/login', (req, res) => {
