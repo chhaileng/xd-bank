@@ -8,9 +8,10 @@ import 'antd/dist/antd.css';
 import Login from "./components/Login"
 import Home from "./components/Home"
 import Faq from "./components/Faq"
-import Inbox from "./components/Inbox"
+// import Inbox from "./components/Inbox"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import NotFound from "./components/NotFound"
 
 export default function App() {
   const [loading, setLoading] = React.useState(true);
@@ -27,10 +28,18 @@ export default function App() {
         setUser(user);
 
         if (!user) {
-          history.push('/login');
+          if (location.pathname === '/') {
+            history.push('/login');
+          }
+        } else {
+          if (location.pathname === '/login') {
+            history.push('/')
+          }
         }
+      }).catch(e => {
+        setLoading(true);
       });
-  }, [history, setUser, setLoading]);
+  }, [history, setUser, setLoading, location.pathname]);
 
   React.useEffect(() => {
     if (!doneFirstLoad || location.pathname) {
@@ -55,17 +64,20 @@ export default function App() {
             </div>
           ) : (
             <Switch>
-              <Route path="/login">
+              <Route exact path="/login">
                 <Login />
               </Route>
-              <Route path="/inbox">
+              {/* <Route exact path="/inbox">
                 <Inbox />
-              </Route>
-              <Route path="/faq">
+              </Route> */}
+              <Route exact path="/faq">
                 <Faq />
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                 <Home user={user} setUser={setUser} />
+              </Route>
+              <Route exact path="*">
+                <NotFound />
               </Route>
             </Switch>
           ) }

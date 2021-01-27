@@ -8,7 +8,10 @@ export default function TransactionHistory({ data = [] }) {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
-      render: amount => <Typography.Text type={amount > 0 ? 'success' : 'danger'}>{amount > 0 ? '+' : ''}{amount}</Typography.Text>,
+      render: amount => {
+        const numFormat = new Intl.NumberFormat();
+        return <Typography.Text type={amount > 0 ? 'success' : 'danger'}>{amount > 0 ? '+' : ''}{numFormat.format(amount)}</Typography.Text>
+      },
     },
     {
       title: 'To / From',

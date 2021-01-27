@@ -32,12 +32,7 @@ export default function Home({ user, setUser }) {
   };
 
   const handleTransfer = (values) => {
-    console.log(values)
     setConfirmLoading(true);
-    // setTimeout(() => {
-    //   setVisible(false);
-    //   setConfirmLoading(false);
-    // }, 2000);
     fetch('/transfer', {
       method: 'post',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -45,23 +40,18 @@ export default function Home({ user, setUser }) {
     })
       .then(res => res.json())
       .then(res => {
-        
         if (res.success) {
           const updatedUser = res.user;
           setUser(updatedUser);
-          // Success
           message.success('Transfer success')
           setVisible(false);
         } else {
-          // Failed
           message.error(res.error)
         }
 
-        // 
         setConfirmLoading(false);
       })
       .catch(e => {
-        // setTransferError('An unknown error occurred.');
         message.error('An unknown error occurred.')
         setVisible(false);
         setConfirmLoading(false);
@@ -146,6 +136,10 @@ export default function Home({ user, setUser }) {
             <Input placeholder="Remark (optional)" />
           </Form.Item>
         </Form>
+        <Alert style={{marginBottom: 20}}
+          description="Warning: This page is vulnerable to CSRF attacks!"
+          type="warning"
+        />
       </Modal>
     </>
   ) : (

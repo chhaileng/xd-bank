@@ -10,9 +10,9 @@ export default function Footer() {
       <Row>
         <Col flex="none">© Copyright xD Bank | 2021</Col>
         <Col flex="auto" style={{textAlign: 'right'}}>
-          <Space>
-            <Link to="/about">/about</Link>
-            <Link to="/faq">/faq</Link>
+          <Space size="middle">
+            <a href="https://github.com/chhaileng/xd-bank" target="_blank" rel="noopener noreferrer">Source Code</a>
+            <Link to="/faq">FAQ</Link>
           </Space>
         </Col>
       </Row>
