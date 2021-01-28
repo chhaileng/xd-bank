@@ -36,23 +36,31 @@ export default function Login() {
     <div style={{maxWidth: '400px', margin: 'auto'}}>
       <Typography.Title level={3}>xD Bank Login</Typography.Title>
       <Alert style={{marginBottom: 20}}
-        description="Use any unique username and any password. Nothing is stored or checked ^.^"
+        description="Use any unique username and any password. Nothing is checked. Your user will be stored in memory and removed after 3 hours ^.^"
         type="info"
       />
       <Form
         name="normal_login"
         initialValues={{ remember: true }}
         onFinish={onFinish}
+        validateMessages={{
+          // eslint-disable-next-line
+          required: 'Please input your ${name}',
+          string: {
+            // eslint-disable-next-line
+            max: 'Limit to ${max} characters only',
+          },
+        }}
       >
         <Form.Item
           name="username"
-          rules={[{ required: true, message: 'Please input your Username!' }]}
+          rules={[{ required: true, max: 10 }]}
         >
           <Input prefix={<UserOutlined />} placeholder="Username" />
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: 'Please input your Password!' }]}
+          rules={[{ required: true }]}
         >
           <Input.Password
             prefix={<LockOutlined />}

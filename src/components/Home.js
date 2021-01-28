@@ -59,19 +59,6 @@ export default function Home({ user, setUser }) {
       });
   }
 
-  const validateMessages = {
-    // eslint-disable-next-line
-    required: '${label} is required',
-    types: {
-      // eslint-disable-next-line
-      number: '${label} is not a valid number',
-    },
-    number: {
-      // eslint-disable-next-line
-      range: '${label} must be between ${min} and ${max}',
-    },
-  };
-
   // const data = [
     // {
     //   transaction_id: ''
@@ -126,9 +113,25 @@ export default function Home({ user, setUser }) {
           description="You can transfer to a known account or just a random account. ^^"
           type="info"
         />
-        <Form labelCol={{span: 4}} wrapperCol={{span: 19}} validateMessages={validateMessages} form={form} onFinish={handleTransfer}>
-          <Form.Item name="username" label="Account" rules={[{ required: true }]}>
-            <Input placeholder="Account name (put anything)" />
+        <Form labelCol={{span: 5}} wrapperCol={{span: 18}} validateMessages={{
+            // eslint-disable-next-line
+            required: '${label} is required',
+            types: {
+              // eslint-disable-next-line
+              number: 'Invalid amount',
+            },
+            number: {
+              // eslint-disable-next-line
+              range: 'Transfer amount must be between $${min} and $${max}',
+            },
+            string: {
+              // eslint-disable-next-line
+              max: 'Limit to ${max} characters only'
+            }
+          }} 
+          form={form} onFinish={handleTransfer}>
+          <Form.Item name="username" label="Account" rules={[{ required: true, max: 10 }]}>
+            <Input placeholder="Account name" />
           </Form.Item>
           <Form.Item name="amount" label="Amount" rules={[{ required: true, type: 'number', min: 1, max: 10000 }]}>
             <InputNumber placeholder="Amount to transfer" style={{width: '100%'}} />

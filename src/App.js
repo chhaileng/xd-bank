@@ -33,12 +33,15 @@ export default function App() {
           if (location.pathname === '/') {
             history.push('/login');
             if(doneFirstLoad) {
-              message.error('Session Expired');
+              message.info('Please login to continue');
             }
           }
         } else {
           if (location.pathname === '/login') {
             history.push('/');
+            if(doneFirstLoad) {
+              message.success('Authenticated');
+            }
           }
         }
       }).catch(e => {

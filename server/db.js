@@ -4,7 +4,7 @@ const THREE_HOUR_MS = 1000 * 60 * 60 * 3;
 
 const user = {
   login: (username, password) => {
-    const user = users[username.toLowerCase()];
+    const user = users[username.toLowerCase().trim()];
     if (user) {
       return user;
     } else {
@@ -25,7 +25,7 @@ const user = {
     }
   },
   findUser: (username) => {
-    return users[username.toLowerCase()] || null
+    return users[username.toLowerCase().trim()] || null
   },
   checkAndRemoveUsers: () => {
     for (let username in users) {
@@ -45,8 +45,9 @@ const transfer = (sender, amount, receiver_username, remark) => {
     return false;
   }
 
-  amount =  parseFloat(amount);
-  receiver_username = receiver_username.toLowerCase();
+  remark = typeof remark === 'undefined' ? remark : '';
+  // amount =  parseFloat(amount);
+  receiver_username = receiver_username.toLowerCase().trim();
   const { transactions } = sender;
   const receiver = user.findUser(receiver_username);
   if (receiver) {

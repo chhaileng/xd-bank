@@ -72,21 +72,21 @@ app.post('/logout', isAuthenticated, (req, res) => {
 app.post('/transfer', isAuthenticated, (req, res) => {
   const { amount, remark, username } = req.body;
   const floatAmount = parseFloat(amount);
+
   if (
+    (typeof amount === 'undefined' || amount === '') ||
+    (typeof username === 'undefined' || username.trim() === '') ||
     isNaN(floatAmount) ||
-    floatAmount <= 0 ||
-    remark == null ||
-    remark == '' ||
-    username == null ||
-    username == ''
+    floatAmount <= 0
   ) {
     return res.status(400).json({ error: "Invalid information!", success: false });
   }
+
   const authUser = req.user;
-  if (username === authUser.username) {
+  if (username.toLowerCase().trim() === authUser.username) {
     return res.status(401).json({ error: "You can't transfer to your own account!", success: false });
   }
-  const resUser = db.transfer(authUser, amount, username, remark);
+  const resUser = db.transfer(authUser, floatAmount, username, remark);
   if (resUser === false) {
     return res.status(401).json({ error: "You don't have enough balance!", success: false });
   }
