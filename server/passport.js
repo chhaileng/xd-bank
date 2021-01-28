@@ -18,7 +18,7 @@ module.exports = (passport) => {
   });
 
   passport.deserializeUser((user, done) => {
-    done(null, user);
+    done(null, db.user.findUser(user.username));
   })
 
 }

@@ -1,77 +1,17 @@
-// // We're just going to fake having a db and store everything in memory :)
-// // This also gives us the benefit of everything happening synchronously!
-// const crypto = require('crypto');
-
-// const randomHash = () => crypto.randomBytes(10).toString('hex');
-// // username -> user
-// const users = {};
-
-// // session ID -> username
-// const sessions = {};
-
-// // Returns the session ID
-// function handleLogin(username, password) {
-//   const sessionID = randomHash();
-
-//   users[username] = {
-//     username,
-//     balance: 10000,
-//     transactions: [
-//       {
-//         amount: 10000,
-//         username: 'xd_bank',
-//         remark: 'Initial Balance :)',
-//         balance: 10000
-//       }
-//     ],
-//   };
-//   sessions[sessionID] = username;
-
-//   return sessionID;
-// }
-
-// function logout(sessionID) {
-//   delete sessions[sessionID]
-// }
-
-// function getUser(sessionID) {
-//   // console.log(sessions, users)
-//   return users[sessions[sessionID]];
-// }
-
-// // Returns the updated user, or false on failure.
-// function makeTransfer(user, amount, username, remark) {
-//   if (user.balance < amount) {
-//     return false;
-//   }
-  
-//   const { transactions } = user;
-//   user.balance -= amount;
-//   transactions.push({ amount: -amount, remark, username, balance: user.balance });
-//   return user;
-// }
-
-// module.exports = {
-//   handleLogin,
-//   logout,
-//   getUser,
-//   makeTransfer,
-// };
-
 const users = {};
 
+const THREE_HOUR_MS = 1000 * 60 * 60 * 3;
+
 const user = {
-  findUser: (username) => {
-    return users[username]
-  },
   login: (username, password) => {
-    const user = users[username];
+    const user = users[username.toLowerCase()];
     if (user) {
       return user;
     } else {
       users[username] = {
         username,
         balance: 10000,
+        account_expire_at: Date.now() + THREE_HOUR_MS,
         transactions: [
           {
             amount: 10000,
@@ -84,9 +24,20 @@ const user = {
       return users[username];
     }
   },
-  // deposit: (acc_username, ) => {
-
-  // }
+  findUser: (username) => {
+    return users[username.toLowerCase()] || null
+  },
+  checkAndRemoveUsers: () => {
+    for (let username in users) {
+      if(users.hasOwnProperty(username)) {
+        const now = Date.now();
+        const account_expire_at = users[username].account_expire_at;
+        if (account_expire_at <= now) {
+          delete users[username];
+        }
+      }
+    }
+  }
 }
 
 const transfer = (sender, amount, receiver_username, remark) => {
@@ -94,27 +45,45 @@ const transfer = (sender, amount, receiver_username, remark) => {
     return false;
   }
 
+  amount =  parseFloat(amount);
+  receiver_username = receiver_username.toLowerCase();
   const { transactions } = sender;
   const receiver = user.findUser(receiver_username);
   if (receiver) {
-
+    sender.balance -= amount;
+    receiver.balance += amount;
+    // Update sender transaction
+    transactions.push({
+      amount: -amount,
+      username: receiver_username,
+      remark,
+      balance: sender.balance
+    });
+    // Update receiver transaction
+    const receiver_transactions = receiver.transactions
+    receiver_transactions.push({
+      amount: amount,
+      username: sender.username,
+      remark,
+      balance: receiver.balance
+    });
+    users[sender.username] = sender;
+    users[receiver_username] = receiver;
   } else {
     sender.balance -= amount;
     transactions.push({
       amount: -amount,
-      username,
+      username: receiver_username,
       remark,
       balance: sender.balance
     });
+    users[sender.username] = sender;
   }
 
-  
-  const { transactions } = user;
-  user.balance -= amount;
-  transactions.push({ amount: -amount, remark, username, balance: user.balance });
-  return user;
+  return users[sender.username];
 }
 
 module.exports = {
-  user
+  user,
+  transfer
 }

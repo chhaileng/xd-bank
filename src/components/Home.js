@@ -45,6 +45,7 @@ export default function Home({ user, setUser }) {
           setUser(updatedUser);
           message.success('Transfer success')
           setVisible(false);
+          form.resetFields();
         } else {
           message.error(res.error)
         }

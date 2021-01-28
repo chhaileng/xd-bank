@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from 'antd/lib/layout';
 import Spin from 'antd/lib/spin';
+import message from 'antd/lib/message';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
@@ -16,6 +17,7 @@ import NotFound from "./components/NotFound"
 export default function App() {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = React.useState(null);
+  // const [updatedUser, setUpdatedUser] = React.useState(null);
   const [doneFirstLoad, setDoneFirstLoad] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -30,16 +32,19 @@ export default function App() {
         if (!user) {
           if (location.pathname === '/') {
             history.push('/login');
+            if(doneFirstLoad) {
+              message.error('Session Expired');
+            }
           }
         } else {
           if (location.pathname === '/login') {
-            history.push('/')
+            history.push('/');
           }
         }
       }).catch(e => {
         setLoading(true);
       });
-  }, [history, setUser, setLoading, location.pathname]);
+  }, [history, setUser, setLoading, location.pathname, doneFirstLoad]);
 
   React.useEffect(() => {
     if (!doneFirstLoad || location.pathname) {
