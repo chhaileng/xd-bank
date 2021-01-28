@@ -15,12 +15,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.enable('trust proxy');
 app.use(session({
   secret: 'xd Bank 16239487619868(^(*^(*%7&$^$',
   name: 'xd-bank',
   resave: true,
   saveUninitialized: true,
   rolling: false,
+  proxy: true,
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     maxAge: ONE_HOUR_MS
