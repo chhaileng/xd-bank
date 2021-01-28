@@ -45,8 +45,7 @@ const transfer = (sender, amount, receiver_username, remark) => {
     return false;
   }
 
-  remark = typeof remark === 'undefined' ? remark : '';
-  // amount =  parseFloat(amount);
+  remark = remark == 'undefined' ? '' : remark.trim();
   receiver_username = receiver_username.toLowerCase().trim();
   const { transactions } = sender;
   const receiver = user.findUser(receiver_username);

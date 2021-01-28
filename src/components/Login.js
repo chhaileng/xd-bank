@@ -56,13 +56,14 @@ export default function Login() {
           name="username"
           rules={[{ required: true, max: 10 }]}
         >
-          <Input prefix={<UserOutlined />} placeholder="Username" />
+          <Input prefix={<UserOutlined />} placeholder="Username" autoCapitalize="none" autoCorrect="off" />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[{ required: true }]}
         >
           <Input.Password
+            autoCapitalize="none" autoCorrect="off" 
             prefix={<LockOutlined />}
             type="password"
             placeholder="Password"
