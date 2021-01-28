@@ -7,7 +7,7 @@ const db = require('./db');
 
 const app = express();
 
-const BUILD_PATH = process.env.NODE_ENV === 'production' ? path.join(__dirname, './static_build') : path.join(__dirname, '../build');
+const BUILD_PATH = path.join(__dirname, '../build');
 const ONE_HOUR_MS = 1000 * 60 * 60;
 
 app.use(express.static(BUILD_PATH));
@@ -59,6 +59,7 @@ app.post('/login', (req, res, next) => {
         return res.status(400).end();
       }
       req.session.save(() => {
+        console.log('login success')
         res.status(301).redirect('/');
       })
     });

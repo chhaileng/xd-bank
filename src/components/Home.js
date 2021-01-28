@@ -131,7 +131,7 @@ export default function Home({ user, setUser }) {
           }} 
           form={form} onFinish={handleTransfer}>
           <Form.Item name="username" label="Account" rules={[{ required: true, max: 10 }]}>
-            <Input placeholder="Account name" />
+            <Input placeholder="Account name" autoCapitalize="none" autoCorrect="off" />
           </Form.Item>
           <Form.Item name="amount" label="Amount" rules={[{ required: true, type: 'number', min: 1, max: 10000 }]}>
             <InputNumber placeholder="Amount to transfer" style={{width: '100%'}} />
