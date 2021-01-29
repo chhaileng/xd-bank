@@ -4,13 +4,15 @@ import Input from 'antd/lib/input';
 import Button from 'antd/lib/button';
 import Typography from 'antd/lib/typography';
 import Alert from 'antd/lib/alert';
-import message from 'antd/lib/message'
+import message from 'antd/lib/message';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
   const history = useHistory();
   const [loading, setLoading] = React.useState(false)
+  const { t } = useTranslation();
 
   const onFinish = useCallback((values) => {
     setLoading(true)
@@ -21,22 +23,22 @@ export default function Login() {
     }).then(res => {
       setLoading(false)
       if (res.redirected) {
-        message.success('Login success')
+        message.success(t('login.message.success'))
         history.push('/')
       } else {
-        message.error('Login failed')
+        message.error(t('login.message.failed'))
       }
     }).catch(e => {
       setLoading(false)
-      message.error('An unknown error occurred.')
+      message.error(t('message.error'))
     })
-  }, [setLoading, history]);
+  }, [setLoading, history, t]);
 
   return (
     <div style={{maxWidth: '400px', margin: 'auto'}}>
-      <Typography.Title level={3}>xD Bank Login</Typography.Title>
+      <Typography.Title level={3}>{t('login.header')}</Typography.Title>
       <Alert style={{marginBottom: 20}}
-        description="Use any unique username and any password. Nothing is checked. Your user will be stored in memory and removed after 3 hours ^.^"
+        description={t('login.info')}
         type="info"
       />
       <Form
@@ -45,10 +47,10 @@ export default function Login() {
         onFinish={onFinish}
         validateMessages={{
           // eslint-disable-next-line
-          required: 'Please input your ${name}',
+          required: t('login.validate.required'),
           string: {
             // eslint-disable-next-line
-            max: 'Limit to ${max} characters only',
+            max: t('login.validate.string.max'),
           },
         }}
       >
@@ -56,7 +58,7 @@ export default function Login() {
           name="username"
           rules={[{ required: true, max: 10 }]}
         >
-          <Input prefix={<UserOutlined />} placeholder="Username" autoCapitalize="none" autoCorrect="off" />
+          <Input prefix={<UserOutlined />} placeholder={t('login.username')} autoCapitalize="none" autoCorrect="off" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -66,12 +68,12 @@ export default function Login() {
             autoCapitalize="none" autoCorrect="off" 
             prefix={<LockOutlined />}
             type="password"
-            placeholder="Password"
+            placeholder={t('login.password')}
           />
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading}>Login</Button>
+          <Button type="primary" htmlType="submit" loading={loading}>{t('login.login')}</Button>
         </Form.Item>
       </Form>
     </div>

@@ -59,7 +59,6 @@ app.post('/login', (req, res, next) => {
         return res.status(400).end();
       }
       req.session.save(() => {
-        console.log('login success')
         res.status(301).redirect('/');
       })
     });

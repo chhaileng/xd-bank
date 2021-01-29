@@ -1,0 +1,62 @@
+{
+  "app.authenticated" : "បានផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ",
+  "app.please_login" : "សូមចូលប្រើប្រាស់ដើម្បីបន្ដ",
+  "app.connecting" : "កំពុងតភ្ជាប់...",
+  "app.page_not_found" : "រកទំព័រមិនឃើញ",
+
+  "login.header" : "ចូលប្រើ xD Bank",
+  "login.info" : "ប្រើឈ្មោះអ្នកប្រើប្រាស់ណាមួយដែលមានតែមួយគត់ និងពាក្យសម្ងាត់អ្វីក៏បានដែរ ។ មិនមានការពិនិត្យលក្ខខ័ណ្ឌអ្វីទេ ។ គណនីអ្នកនឹងត្រូវផ្ទុកក្នុងអង្គចងចាំបណ្ដោះអាសន្ន និងត្រូវលុបចោលវិញនៅ ៣ ម៉ោងបន្ទាប់ ។ ^.^",
+  "login.username" : "ឈ្មោះអ្នកប្រើប្រាស់",
+  "login.password" : "ពាក្យសម្ងាត់",
+  "login.login" : "ចូល",
+  "login.message.success" : "ចូលប្រើជោគជ័យ",
+  "login.message.failed" : "ចូលប្រើបរាជ័យ",
+  "login.validate.required" : "ទាមទារ",
+  "login.validate.string.max" : "កំណត់ត្រឹម ${max} តួអក្សរតែប៉ុណ្ណោះ",
+
+  "header.khmer" : "ភាសាខ្មែរ",
+  "header.english" : "ភាសាអង់គ្លេស",
+  "header.logout" : "ចាកចេញ",
+  "header.logout_description" : "ចាកចេញពីគណនី",
+  "header.secure_bank" : "! ធនាគាដែលមានសុវត្ថិភាព ដោយ Zer0xdz",
+
+  "home.account_name" : "ឈ្មោះគណនី",
+  "home.balance" : "សមតុល្យ",
+  "home.transfer" : "ផ្ទេរប្រាក់",
+  "home.transaction_history" : "ប្រវត្តិប្រត្តិបត្តការ",
+
+  "home.form.transfer" : "ផ្ទេរប្រាក់",
+  "home.form.account" : "គណនី",
+  "home.form.account_placeholder" : "ឈ្មោះគណនី",
+  "home.form.amount" : "ចំនួនទឹកប្រាក់",
+  "home.form.amount_placeholder" : "ចំនួនទឹកប្រាក់ត្រូវផ្ញើ",
+  "home.form.remark" : "កំណត់សម្គាល់",
+  "home.form.remark_placeholder" : "កំណត់សម្គាល់ (មិនចាំបាច់)",
+  "home.form.info" : "អ្នក​អាច​ផ្ញើ​ទៅ​គណនី​ណា​មួយ​ដែល​ស្គាល់​ ឬ​ក៏គណនីអ្វីក៏បានដែរ ។ ^^",
+  "home.form.warning" : "ព្រមាន: ទំព័រ​នេះ​មានចន្លោះ​ប្រហោង​ ដែលអាច​រង​ការ​វាយ​ប្រហារ​ CSRF !",
+  "home.form.cancel" : "បោះបង់",
+  "home.form.validate.required" : "ទាមទារ",
+  "home.form.validate.types.number" : "ចំនួនទឹកប្រាក់មិនត្រឹមត្រូវ",
+  "home.form.validate.number.range" : "ចំនួនទឹកប្រាក់ត្រូវផ្ញើត្រូវតែស្ថិតក្នុងចន្លោះពី $${min} ដល់ $${max}",
+  "home.form.validate.string.max" : "កំណត់ត្រឹម ${max} តួអក្សរតែប៉ុណ្ណោះ",
+  "home.message.transfer_success" : "ការផ្ទេរប្រាក់ជោគជ័យ",
+
+  "home.transaction.amount" : "ចំនួនទឹកប្រាក់",
+  "home.transaction.to_from" : "ទៅ / ពី",
+  "home.transaction.remark" : "កំណត់សម្គាល់",
+  "home.transaction.balance" : "សមតុល្យ",
+
+  "faq.header" : "សំណួរ និងចម្លើយដែលត្រូវបានសួរញឹកញាប់",
+  "faq.search_placeholder" : "ស្វែងរកសំណួរ និងចម្លើយ",
+  "faq.show_all_faqs" : "បង្ហាញសំណួរ និងចម្លើយទាំងអស់",
+  "faq.show_search_result" : "បង្ហាញលទ្ធផលស្វែងរកនៃ",
+  "faq.no_result" : "គ្មានលទ្ធផល",
+  "faq.warning" : "ព្រមាន: ទំព័រនេះមានចន្លោះប្រហោង ដែលអាចរងការវាយប្រហារ XSS !",
+
+  "message.logout" : "គណនីបានចាកចេញ",
+  "message.error" : "មានកំហុសបានកើតឡើង",
+
+  "footer.copyright" : "© xD Bank | ២០២១",
+  "footer.source_code" : "ប្រភពកូដ",
+  "footer.faq" : "សំណួរ & ចម្លើយ"
+}
