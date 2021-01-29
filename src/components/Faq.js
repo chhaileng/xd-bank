@@ -9,28 +9,64 @@ import { useTranslation } from 'react-i18next';
 
 const faqs = [
   {
-    q: 'What is xD Bank?',
-    a_html: 'It is a small application that does some trasfering money like a bank.'
+    en: {
+      q: 'What is xD Bank?',
+      a_html: 'It is a small application that does some trasfering money like a bank.'
+    },
+    km: {
+      q: 'អ្វីទៅជា xD Bank?',
+      a_html: 'វាជាកម្មវិធីតូចមួយ ដែលអាចធ្វើការផ្ញើប្រាក់បាន ដូចជាធនាគាដែរ ។'
+    }
   },
   {
-    q: 'For what it is made?',
-    a_html: 'I made this application for security demonstration purpose.'
+    en: {
+      q: 'For what it is made?',
+      a_html: 'I made this application for security demonstration purpose.'
+    },
+    km: {
+      q: 'តើវាបង្កើតឡើងដើម្បីអ្វី?',
+      a_html: 'ខ្ញុំបង្កើតកម្មវិធីនេះដើម្បីធ្វើបទបង្ហាញពីចន្លោះប្រហោង និងសុវត្ថិភាពនៃកម្មវិធី ។'
+    }
   },
   {
-    q: 'What vulnerabilities on this website?',
-    a_html: 'Actually I made this for demonstration about XSS and CSRF.'
+    en: {
+      q: 'What vulnerabilities on this website?',
+      a_html: 'Actually I made this for demonstration about XSS and CSRF.'
+    },
+    km: {
+      q: 'តើមានចន្លោះប្រហោងអ្វីខ្លះនៅលើកម្មវិធីនេះ?',
+      a_html: 'ខ្ញុំបង្កើតកម្មវិធីនេះឡើងដើម្បីបង្ហាញពីចន្លោះប្រហោះ និងគ្រោះថ្នាក់នៃ XSS និង CSRF ។'
+    }
   },
   {
-    q: 'Is it safe to use this application?',
-    a_html: 'YES! user information in this application is not stored or checked. Users and sessions are stored on memory and got reset when Heroku Dyno go to sleep.'
+    en: {
+      q: 'Is it safe to use this application?',
+      a_html: 'YES! user information in this application is not stored or checked. Users and sessions are stored on memory and removed after 3 hours. Moreover, it is hosted on Heroku Free Dyno. So when the Dyno goes sleep, all data will be removed.'
+    },
+    km: {
+      q: 'តើវាមានសុវត្ថិភាពទេក្នុងការប្រើប្រាស់កម្មវិធីនេះ?',
+      a_html: 'បាទ! ព័ត៌មានរបស់អ្នកប្រើប្រាស់មិនត្រូវបានផ្ទុក ឬពិនិត្យទេ ។ គណនីអ្នកប្រើប្រាស់ និង sessions ត្រូវបានផ្ទុកនៅលើ memory និងត្រូវបានលុបចោលវិញនៅ ៣ ម៉ោងបន្ទាប់ ។ ម្យ៉ាងទៀត​កម្មវិធីនេះដំណើរការនៅលើ Heroku Free Dyno ដូចនេះរាល់ពេល Dyno sleep ព័ត៌មានផ្សេងៗនឹងត្រូវលុបចោល ។'
+    }
   },
   {
-    q: 'How to access to application source code?',
-    a_html: 'The source code of this application is availble on <a href="https://github.com/chhaileng/xd-bank">GitHub</>.'
+    en: {
+      q: 'How to access to application source code?',
+      a_html: 'The source code of this application is availble on <a href="https://github.com/chhaileng/xd-bank">GitHub</a>.'
+    },
+    km: {
+      q: 'តើធ្វើដូចម្តេចដើម្បីបានប្រភពកូដនៃកម្មវិធី?',
+      a_html: 'ប្រពភកូដនៃកម្មវិធីនេះ មាននៅលើ <a target="_blank" ref="noopener noreferrer" href="https://github.com/chhaileng/xd-bank">GitHub</a> ។'
+    }
   },
   {
-    q: 'About',
-    a_html: 'Made by Chhaileng'
+    en: {
+      q: 'About',
+      a_html: 'Made by <a target="_blank ref="noopener noreferrer" href="https://www.chhaileng.com">Chhaileng</a>'
+    },
+    km: {
+      q: 'អំពីកម្មវិធី',
+      a_html: 'បង្កើតដោយ <a href="https://www.chhaileng.com">ឆ័យឡេង</a>'
+    }
   },
 ]
 
@@ -39,7 +75,7 @@ export default function Faq() {
   const history = useHistory();
   const location = useLocation();
   const [searchText, setSearchText] = React.useState('')
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get('q');
@@ -49,11 +85,14 @@ export default function Faq() {
   }
 
   const filtered = query ? faqs.filter(faq => {
-    const matchedQuestion = faq.q.toLowerCase().includes(query.toLowerCase())
+    const matchedQuestionEn = faq.en.q.toLowerCase().includes(query.toLowerCase())
     const tmpSpan = document.createElement('span')
-    tmpSpan.innerHTML = faq.a_html
-    const matchedAnswer = tmpSpan.innerText.toLowerCase().includes(query.toLowerCase())
-    return matchedQuestion || matchedAnswer
+    tmpSpan.innerHTML = faq.en.a_html
+    const matchedAnswerEn = tmpSpan.innerText.toLowerCase().includes(query.toLowerCase())
+    const matchedQuestionKm = faq.km.q.toLowerCase().includes(query.toLowerCase())
+    tmpSpan.innerHTML = faq.km.a_html
+    const matchedAnswerKm = tmpSpan.innerText.toLowerCase().includes(query.toLowerCase())
+    return matchedQuestionEn || matchedAnswerEn || matchedQuestionKm || matchedAnswerKm
   }) : faqs;
 
   React.useEffect(() => {
@@ -75,8 +114,8 @@ export default function Faq() {
         filtered.length > 0 ? (
           <Collapse accordion>
             {filtered.map((faq, index) => 
-              <Collapse.Panel header={faq.q} key={index+1}>
-                <div style={{width: '100%'}} dangerouslySetInnerHTML={{__html: faq.a_html}} />
+              <Collapse.Panel header={faq[i18n.language].q} key={index+1}>
+                <div style={{width: '100%'}} dangerouslySetInnerHTML={{__html: faq[i18n.language].a_html}} />
               </Collapse.Panel>
             )}
           </Collapse>
