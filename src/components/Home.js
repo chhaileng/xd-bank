@@ -1,17 +1,17 @@
 import React from 'react';
-import Button from 'antd/lib/button'
-import Statistic from 'antd/lib/statistic'
-import Row from 'antd/lib/row'
-import Space from 'antd/lib/space'
-import Typography from 'antd/lib/typography'
-import Modal from 'antd/lib/modal'
-import Form from 'antd/lib/form'
-import Input from 'antd/lib/input'
-import InputNumber from 'antd/lib/input-number'
-import Alert from 'antd/lib/alert'
-import message from 'antd/lib/message'
-
+import Button from 'antd/lib/button';
+import Statistic from 'antd/lib/statistic';
+import Row from 'antd/lib/row';
+import Space from 'antd/lib/space';
+import Typography from 'antd/lib/typography';
+import Modal from 'antd/lib/modal';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import InputNumber from 'antd/lib/input-number';
+import Alert from 'antd/lib/alert';
+import message from 'antd/lib/message';
 import crypto from 'crypto';
+import { useTranslation } from "react-i18next";
 
 import TransactionHistory from './TransactionHistory';
 
@@ -21,7 +21,7 @@ export default function Home({ user, setUser }) {
   const [visible, setVisible] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [form] = Form.useForm();
-
+  const { t } = useTranslation();
   const showModal = () => {
     setVisible(true);
   };
@@ -43,7 +43,7 @@ export default function Home({ user, setUser }) {
         if (res.success) {
           const updatedUser = res.user;
           setUser(updatedUser);
-          message.success('Transfer success')
+          message.success(t('home.message.transfer_success'))
           setVisible(false);
           form.resetFields();
         } else {
@@ -53,33 +53,11 @@ export default function Home({ user, setUser }) {
         setConfirmLoading(false);
       })
       .catch(e => {
-        message.error('An unknown error occurred.')
+        message.error(t('message.error'))
         setVisible(false);
         setConfirmLoading(false);
       });
   }
-
-  // const data = [
-    // {
-    //   transaction_id: ''
-    //   amount: 12,
-    //   username: 'sok',
-    //   remark: 'Breakfast',
-    //   balance: 23222,
-    // },
-    // {
-    //   amount: -43,
-    //   username: 'sao',
-    //   remark: 'Dinner',
-    //   balance: 20001.3,
-    // },
-    // {
-    //   amount: 20000,
-    //   username: 'xd_bank',
-    //   remark: 'Initial Balance',
-    //   balance: 2000,
-    // },
-  // ];
 
   // add unique key to array
   const transactions = user ? user.transactions.map(t => ({ ...t, key: randomHash()})) : []
@@ -89,59 +67,60 @@ export default function Home({ user, setUser }) {
     <>
     <Space size="middle" direction="vertical" style={{width: '100%'}}>
       <Row>
-        <Statistic title="Account Name" value={user.username} style={{ textTransform: 'uppercase' }} />
-        <Statistic title="Balance" prefix="$" value={user.balance} style={{  margin: '0 32px', textTransform: 'uppercase' }} />
+        <Statistic title={t('home.account_name')} value={user.username} style={{ textTransform: 'uppercase' }} />
+        <Statistic title={t('home.balance')} prefix="$" value={user.balance} style={{  margin: '0 32px', textTransform: 'uppercase' }} />
       </Row>
       <Row>
-        <Button size="small" type="primary" onClick={showModal}>Transfer</Button>
+        <Button size="small" type="primary" onClick={showModal}>{t('home.transfer')}</Button>
         
       </Row>
-      <Typography.Title level={5}>Transaction History</Typography.Title>
+      <Typography.Title level={5}>{t('home.transaction_history')}</Typography.Title>
       <TransactionHistory data={transactions} />
     </Space>
     <Modal
-        title="Transfer"
+        title={t('home.form.transfer')}
         visible={visible}
         onOk={form.submit}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         maskClosable={false}
-        okText="Transfer"
+        okText={t('home.form.transfer')}
+        cancelText={t('home.form.cancel')}
         okButtonProps={{form: 'form-transfer', key: 'submit', htmlType: 'submit'}}
       >
         <Alert style={{marginBottom: 20}}
-          description="You can transfer to a known account or just a random account. ^^"
+          description={t('home.form.info')}
           type="info"
         />
         <Form labelCol={{span: 5}} wrapperCol={{span: 18}} validateMessages={{
             // eslint-disable-next-line
-            required: '${label} is required',
+            required: t('home.form.validate.required'),
             types: {
               // eslint-disable-next-line
-              number: 'Invalid amount',
+              number: t('home.form.validate.types.number'),
             },
             number: {
               // eslint-disable-next-line
-              range: 'Transfer amount must be between $${min} and $${max}',
+              range: t('home.form.validate.number.range')
             },
             string: {
               // eslint-disable-next-line
-              max: 'Limit to ${max} characters only'
+              max: t('home.form.validate.string.max')
             }
           }} 
           form={form} onFinish={handleTransfer}>
-          <Form.Item name="username" label="Account" rules={[{ required: true, max: 10 }]}>
-            <Input placeholder="Account name" autoCapitalize="none" autoCorrect="off" />
+          <Form.Item name="username" label={t('home.form.account')} rules={[{ required: true, max: 10 }]}>
+            <Input placeholder={t('home.form.account_placeholder')} autoCapitalize="none" autoCorrect="off" />
           </Form.Item>
-          <Form.Item name="amount" label="Amount" rules={[{ required: true, type: 'number', min: 1, max: 10000 }]}>
-            <InputNumber placeholder="Amount to transfer" style={{width: '100%'}} />
+          <Form.Item name="amount" label={t('home.form.amount')} rules={[{ required: true, type: 'number', min: 1, max: 10000 }]}>
+            <InputNumber placeholder={t('home.form.amount_placeholder')} style={{width: '100%'}} />
           </Form.Item>
-          <Form.Item name="remark" label="Remark">
-            <Input placeholder="Remark (optional)" />
+          <Form.Item name="remark" label={t('home.form.remark')}>
+            <Input placeholder={t('home.form.remark_placeholder')} />
           </Form.Item>
         </Form>
         <Alert style={{marginBottom: 20}}
-          description="Warning: This page is vulnerable to CSRF attacks!"
+          description={t('home.form.warning')}
           type="warning"
         />
       </Modal>

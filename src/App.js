@@ -3,6 +3,7 @@ import Layout from 'antd/lib/layout';
 import Spin from 'antd/lib/spin';
 import message from 'antd/lib/message';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import 'antd/dist/antd.css';
 
@@ -17,10 +18,10 @@ import NotFound from "./components/NotFound"
 export default function App() {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = React.useState(null);
-  // const [updatedUser, setUpdatedUser] = React.useState(null);
   const [doneFirstLoad, setDoneFirstLoad] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const reloadUser = React.useCallback(() => {
     return fetch('/user')
@@ -33,21 +34,21 @@ export default function App() {
           if (location.pathname === '/') {
             history.push('/login');
             if(doneFirstLoad) {
-              message.info('Please login to continue');
+              message.info(t('app.please_login'));
             }
           }
         } else {
           if (location.pathname === '/login') {
             history.push('/');
             if(doneFirstLoad) {
-              message.success('Authenticated');
+              message.success(t('app.authenticated'));
             }
           }
         }
       }).catch(e => {
         setLoading(true);
       });
-  }, [history, setUser, setLoading, location.pathname, doneFirstLoad]);
+  }, [history, setUser, setLoading, location.pathname, doneFirstLoad, t]);
 
   React.useEffect(() => {
     if (!doneFirstLoad || location.pathname) {
@@ -68,7 +69,7 @@ export default function App() {
         <Layout.Content style={{margin: 20, minHeight: 'calc(100vh - 182px)'}}>
           { loading ? (
             <div style={{textAlign: 'center', paddingTop: 50}}>
-              <Spin size="large" tip="Connecting..."/>
+              <Spin size="large" tip={t('app.connecting')} />
             </div>
           ) : (
             <Switch>

@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import './locale/i18n-configuration';
+
 ReactDOM.render(
   // Disable StrickMode to prevent error when using modal
   // <React.StrictMode> 

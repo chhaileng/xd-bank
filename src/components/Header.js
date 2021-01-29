@@ -1,15 +1,19 @@
-import React from 'react'
-import PageHeader from 'antd/lib/page-header'
-import Button from 'antd/lib/button'
-import Tooltip from 'antd/lib/tooltip'
-// import Badge from 'antd/lib/badge'
-import message from 'antd/lib/message'
-import { LockTwoTone } from '@ant-design/icons';
-import { Link, useHistory } from 'react-router-dom'
+import React from 'react';
+import PageHeader from 'antd/lib/page-header';
+import Button from 'antd/lib/button';
+import Tooltip from 'antd/lib/tooltip';
+import Menu from 'antd/lib/menu';
+import Dropdown from 'antd/lib/dropdown';
+import message from 'antd/lib/message';
+import { LockTwoTone, GlobalOutlined } from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 export default function Header({ user }) {
   const history = useHistory();
   const [loading, setLoading] = React.useState(false);
+  const { t, i18n } = useTranslation();
 
   const logout = React.useCallback(() => {
     setLoading(true);
@@ -19,24 +23,36 @@ export default function Header({ user }) {
     }).then(res => {
       setLoading(false)
       if (res.redirected) {
-        message.info('Account logged out')
+        message.info(t('message.logout'))
         history.push('/login')
       }
     }).catch(e => {
       setLoading(false)
-      message.error('An unknown error occurred.')
+      message.error(t('message.error'))
     })
-  }, [setLoading, history])
+  }, [setLoading, history, t])
+
+  const languageMenus = (
+    <Menu>
+      <Menu.Item style={{textAlign: 'center'}} onClick={() => i18n.changeLanguage('km')}>{t('header.khmer')}</Menu.Item>
+      <Menu.Item style={{textAlign: 'center'}} onClick={() => i18n.changeLanguage('en')}>{t('header.english')}</Menu.Item>
+    </Menu>
+  )
+
+  const defaultMenus = [
+    <Dropdown key="lang" overlay={languageMenus} placement="bottomCenter">
+      <Button icon={<GlobalOutlined />} type="text">{i18n.language === 'km' ? t('header.khmer') : t('header.english')}</Button>
+    </Dropdown>,
+  ]
 
   return (
     <PageHeader
       title={<Link to={user ? '/' : '/login'}>xD Bank</Link>}
-      tags={<Tooltip title="! Secure Bank by Zer0xdz"><LockTwoTone twoToneColor="#52c41a" /></Tooltip>}
+      tags={<Tooltip title={t('header.secure_bank')}><LockTwoTone twoToneColor="#52c41a" /></Tooltip>}
       extra={ user ? [
-        // <Badge key="inbox" count={2} size="small"><Tooltip title="Fake Inbox"><Button size="small" icon={<MailOutlined />} onClick={() => {history.push('/inbox')}}>Inbox</Button></Tooltip></Badge>,
-        <Link key="faq" to="/faq" style={{marginRight: 12}}>FAQ</Link>,
-        <Tooltip key="signout" title="Logout of Account"><Button size="small" danger onClick={logout} loading={loading}>Logout</Button></Tooltip>
-      ] : [<Link key="faq" to="/faq" style={{marginRight: 12}}>FAQ</Link>]}
+        ...defaultMenus,
+        <Tooltip key="signout" title={t('header.logout_description')}><Button size="small" danger onClick={logout} loading={loading}>{t('header.logout')}</Button></Tooltip>
+      ] : [...defaultMenus]}
     >
     </PageHeader>
   )

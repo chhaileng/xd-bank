@@ -1,0 +1,62 @@
+{
+  "app.authenticated" : "Authenticated",
+  "app.please_login" : "Please login to continue",
+  "app.connecting" : "Connecting...",
+  "app.page_not_found" : "Page Not Found",
+
+  "login.header" : "xD Bank Login",
+  "login.info" : "Use any unique username and any password. Nothing is checked. Your user will be stored in memory and removed after 3 hours ^.^",
+  "login.username" : "Username",
+  "login.password" : "Password",
+  "login.login" : "Login",
+  "login.message.success" : "Login success",
+  "login.message.failed" : "Login failed",
+  "login.validate.required" : "Require",
+  "login.validate.string.max" : "Limit to ${max} characters only",
+
+  "header.khmer" : "Khmer",
+  "header.english" : "English",
+  "header.logout" : "Logout",
+  "header.logout_description" : "Logout off Account",
+  "header.secure_bank" : "! Secure Bank by Zer0xdz",
+
+  "home.account_name" : "Account Name",
+  "home.balance" : "Balance",
+  "home.transfer" : "Transfer",
+  "home.transaction_history" : "Transaction History",
+
+  "home.form.transfer" : "Transfer",
+  "home.form.account" : "Account",
+  "home.form.account_placeholder" : "Account Name",
+  "home.form.amount" : "Amount",
+  "home.form.amount_placeholder" : "Amount to transfer",
+  "home.form.remark" : "Remark",
+  "home.form.remark_placeholder" : "Remark (optional)",
+  "home.form.info" : "You can transfer to a known account or just a random account. ^^",
+  "home.form.warning" : "Warning: This page is vulnerable to CSRF attacks!",
+  "home.form.cancel" : "Cancel",
+  "home.form.validate.required" : "Require",
+  "home.form.validate.types.number" : "Invalid amount",
+  "home.form.validate.number.range" : "Transfer amount must be between $${min} and $${max}",
+  "home.form.validate.string.max" : "Limit to ${max} characters only",
+  "home.message.transfer_success" : "Transfer success",
+
+  "home.transaction.amount" : "Amount",
+  "home.transaction.to_from" : "To / From",
+  "home.transaction.remark" : "Remark",
+  "home.transaction.balance" : "Balance",
+
+  "faq.header" : "Frequently Asked Questions",
+  "faq.search_placeholder" : "Search FAQs",
+  "faq.show_all_faqs" : "Show all FAQs",
+  "faq.show_search_result" : "Show search result of",
+  "faq.no_result" : "No result found",
+  "faq.warning" : "Warning: This page is vulnerable to XSS attacks!",
+
+  "message.logout" : "Account logged out",
+  "message.error" : "An unknown error occurred.",
+
+  "footer.copyright" : "© xD Bank | 2021",
+  "footer.source_code" : "Source Code",
+  "footer.faq" : "FAQs"
+}
