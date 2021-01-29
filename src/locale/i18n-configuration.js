@@ -19,13 +19,14 @@ i18n
       km
     },
     fallbackLng: 'en',
-    debug: true,
+    debug: process.env.NODE_ENV !== 'production',
     keySeparator: false,
     interpolation: {
       escapeValue: false
     },
     detection: {
-      lookupLocalStorage: 'locale'
+      lookupLocalStorage: 'locale',
+      order: ['localStorage']
     },
   });
 
