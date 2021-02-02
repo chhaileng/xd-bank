@@ -55,7 +55,7 @@ const faqs = [
     },
     km: {
       q: 'តើធ្វើដូចម្តេចដើម្បីបានប្រភពកូដនៃកម្មវិធី?',
-      a_html: 'ប្រពភកូដនៃកម្មវិធីនេះ មាននៅលើ <a target="_blank" ref="noopener noreferrer" href="https://github.com/chhaileng/xd-bank">GitHub</a> ។'
+      a_html: 'ប្រភពកូដនៃកម្មវិធីនេះ មាននៅលើ <a target="_blank" ref="noopener noreferrer" href="https://github.com/chhaileng/xd-bank">GitHub</a> ។'
     }
   },
   {
