@@ -6,6 +6,8 @@ import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import 'antd/dist/antd.css';
+// Use custom khmer font
+import './override-fonts.css';
 
 import Login from "./components/Login"
 import Home from "./components/Home"
