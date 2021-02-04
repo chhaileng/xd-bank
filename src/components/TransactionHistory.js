@@ -11,10 +11,10 @@ export default function TransactionHistory({ data = [] }) {
       title: t('home.transaction.amount'),
       dataIndex: 'amount',
       key: 'amount',
-      render: amount => {
-        const numFormat = new Intl.NumberFormat();
-        return <Typography.Text type={amount > 0 ? 'success' : 'danger'}>{amount > 0 ? '+' : ''}{numFormat.format(amount)}</Typography.Text>
-      },
+      render: amount => <Typography.Text type={amount > 0 ? 'success' : 'danger'}>
+        {amount > 0 ? '+' : ''}{amount.toLocaleString('en-US', {maximumFractionDigits: 2})}
+      </Typography.Text>
+      ,
     },
     {
       title: t('home.transaction.to_from'),
