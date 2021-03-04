@@ -18,7 +18,7 @@
   "header.english" : "ភាសាអង់គ្លេស",
   "header.logout" : "ចាកចេញ",
   "header.logout_description" : "ចាកចេញពីគណនី",
-  "header.secure_bank" : "! ធនាគាដែលមានសុវត្ថិភាព ដោយ Zer0xdz",
+  "header.secure_bank" : "ធនាគាដែល !មានសុវត្ថិភាព ដោយ Zer0xdz",
 
   "home.account_name" : "ឈ្មោះគណនី",
   "home.balance" : "សមតុល្យ",
@@ -33,7 +33,7 @@
   "home.form.remark" : "កំណត់សម្គាល់",
   "home.form.remark_placeholder" : "កំណត់សម្គាល់ (មិនចាំបាច់)",
   "home.form.info" : "អ្នក​អាច​ផ្ញើ​ទៅ​គណនី​ណា​មួយ​ដែល​ស្គាល់​ ឬ​ក៏គណនីអ្វីក៏បានដែរ ។ ^^",
-  "home.form.warning" : "ព្រមាន: ទំព័រ​នេះ​មានចន្លោះ​ប្រហោង​ ដែលអាច​រង​ការ​វាយ​ប្រហារ​ CSRF !",
+  "home.form.warning" : "ព្រមាន៖ ទំព័រ​នេះ​មានចន្លោះ​ប្រហោង​ ដែលអាច​រង​ការ​វាយ​ប្រហារ​ CSRF !",
   "home.form.cancel" : "បោះបង់",
   "home.form.validate.required" : "ទាមទារ",
   "home.form.validate.types.number" : "ចំនួនទឹកប្រាក់មិនត្រឹមត្រូវ",
@@ -51,7 +51,7 @@
   "faq.show_all_faqs" : "បង្ហាញសំណួរ និងចម្លើយទាំងអស់",
   "faq.show_search_result" : "បង្ហាញលទ្ធផលស្វែងរកនៃ",
   "faq.no_result" : "គ្មានលទ្ធផល",
-  "faq.warning" : "ព្រមាន: ទំព័រនេះមានចន្លោះប្រហោង ដែលអាចរងការវាយប្រហារ XSS !",
+  "faq.warning" : "ព្រមាន៖ ទំព័រនេះមានចន្លោះប្រហោង ដែលអាចរងការវាយប្រហារ XSS !",
 
   "message.logout" : "គណនីបានចាកចេញ",
   "message.error" : "មានកំហុសបានកើតឡើង",
