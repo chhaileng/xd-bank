@@ -34,8 +34,12 @@ export default function Header({ user }) {
 
   const languageMenus = (
     <Menu>
-      <Menu.Item style={{textAlign: 'center'}} onClick={() => i18n.changeLanguage('km')}>{t('header.khmer')}</Menu.Item>
-      <Menu.Item style={{textAlign: 'center'}} onClick={() => i18n.changeLanguage('en')}>{t('header.english')}</Menu.Item>
+      { i18n.language === 'km' ? '' :
+        <Menu.Item style={{textAlign: 'center'}} onClick={() => i18n.changeLanguage('km')}>ភាសាខ្មែរ</Menu.Item>
+      }
+      { i18n.language === 'en' ? '' :
+        <Menu.Item style={{textAlign: 'center'}} onClick={() => i18n.changeLanguage('en')}>English</Menu.Item>
+      }
     </Menu>
   )
 

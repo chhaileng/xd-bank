@@ -17,7 +17,7 @@
   "header.khmer" : "Khmer",
   "header.english" : "English",
   "header.logout" : "Logout",
-  "header.logout_description" : "Logout off Account",
+  "header.logout_description" : "Logout Account",
   "header.secure_bank" : "! Secure Bank by Zer0xdz",
 
   "home.account_name" : "Account Name",
